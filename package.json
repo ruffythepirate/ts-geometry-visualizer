@@ -2,9 +2,28 @@
   "name": "ts-geometry-visualizer",
   "version": "1.0.0",
   "description": "Generates SVG elements for geometrical components that can be appended to DOM elements.",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.js",
   "scripts": {
-    "test": "jest"
+    "build": "npx tsc",
+    "lint": "npx tslint src/*",
+    "lint:fix": "npx tslint src/* --fix",
+    "docs": "npx typedoc src",
+    "test": "npx jest src",
+    "test:coverage": "npx jest --coverage src && npm run test:badge",
+    "test:badge": "npx lcov-badge-generator -o coverage/badge.svg coverage/lcov.info",
+    "test:watch": "npx jest --watchAll src"
+  },
+  "jest": {
+    "transform": {
+      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ]
   },
   "keywords": [
     "geometry",
@@ -12,5 +31,20 @@
     "visualization"
   ],
   "author": "Johan Ablett-Karlsson",
-  "license": "MIT"
+  "license": "MIT",
+  "sideEffects": false,
+  "devDependencies": {
+    "@types/jest": "^25.2.2",
+    "@types/node": "^14.0.1",
+    "domino": "^2.1.6",
+    "jest": "^25",
+    "ts-jest": "^25.5.1",
+    "tslint": "^6.1.2",
+    "tslint-config-airbnb": "^5.11.2",
+    "typedoc": "^0.17.6",
+    "typescript": "^3.9.2"
+  },
+  "dependencies": {
+    "ts-2d-geometry": "^4.0.0"
+  }
 }
