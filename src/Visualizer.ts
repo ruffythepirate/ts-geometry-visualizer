@@ -22,7 +22,7 @@ export class Visualizer {
     newElement.setAttributeNS(null, 'y1', '' + ls.p1.y)
     newElement.setAttributeNS(null, 'x2', '' + ls.p2.x)
     newElement.setAttributeNS(null, 'y2', '' + ls.p2.y)
-
+    newElement.setAttributeNS(null, 'style', 'stroke:rgb(255,0,0);stroke-width:2');
     this.parentElement.appendChild(newElement);
     return newElement;
   }
