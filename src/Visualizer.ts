@@ -1,4 +1,4 @@
-import { LineSegment } from 'ts-2d-geometry';
+import { LineSegment, Polygon } from 'ts-2d-geometry';
 
 
 // This is the xml namespace for svg type. 
@@ -16,13 +16,32 @@ export class Visualizer {
 
   }
 
+  /**
+   * Adds a line segment to the element tied to this visualizer.
+   */
   addLineSegment(ls: LineSegment ): Element {
     const newElement = this.document.createElementNS(xmlns, "line");
     newElement.setAttributeNS(null, 'x1', '' + ls.p1.x)
     newElement.setAttributeNS(null, 'y1', '' + ls.p1.y)
     newElement.setAttributeNS(null, 'x2', '' + ls.p2.x)
     newElement.setAttributeNS(null, 'y2', '' + ls.p2.y)
-    newElement.setAttributeNS(null, 'style', 'stroke:rgb(255,0,0);stroke-width:2');
+    newElement.setAttributeNS(null, 'style', 'stroke:black;stroke-width:2');
+    this.parentElement.appendChild(newElement);
+    return newElement;
+  }
+
+  /**
+   * Adds a polygon to the element tied to this visualizer.
+   */
+  addPolygon(p: Polygon): Element {
+    const newElement = this.document.createElementNS(xmlns, "polygon");
+
+    const points = p.points();
+    const pointString = points.map(p => `${p.x},${p.y}`).join(' ');
+
+    newElement.setAttributeNS(null, 'points', pointString);
+    newElement.setAttributeNS(null, 'style', 'fill:none;stroke:black;stroke-width:2');
+
     this.parentElement.appendChild(newElement);
     return newElement;
   }

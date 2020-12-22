@@ -1,4 +1,4 @@
-import { lineSegment } from 'ts-2d-geometry';
+import { lineSegment, point, Polygon } from 'ts-2d-geometry';
 import domino from 'domino'
 import {Visualizer} from '../Visualizer';
 
@@ -19,6 +19,8 @@ describe('generate-svg', () => {
     const l = lineSegment(2, 2, 50, 50);
 
     v.addLineSegment(l);
+    const polygon = Polygon.fromPoints([point(50,0), point(300, 0), point(50,400)]);
+    v.addPolygon(polygon);
 
     writeFile('test.html', createHtml(doc));
   });
