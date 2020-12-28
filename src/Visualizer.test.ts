@@ -44,7 +44,6 @@ describe('Visualizer', () => {
     points.forEach((p) => {
       expect(pointsAttr).toContain(`${p.x},${p.y}`);
     });
-
   });
 
   test('addPolygon should add polygon to parent element', () => {

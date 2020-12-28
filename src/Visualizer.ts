@@ -57,12 +57,17 @@ export class Visualizer {
   /**
    * Adds a vector to an SVG image.
    */
-  addVector(p:Point, v: Vector): Element {
+  addVector(p:Point, v: Vector, parentElement?: Element): Element {
     const newElement = this.document.createElementNS(xmlns, 'g');
     const p2 = p.plus(v);
     this.addLineSegment(lineSegment(p.x, p.y, p2.x, p2.y), newElement);
-    this.addPolygon(createArrow(1, p.plus(v), v), newElement);
+    this.addPolygon(createArrow(v.norm2() / 8.0, p.plus(v), v), newElement);
 
+    if (parentElement !== undefined) {
+      parentElement.appendChild(newElement);
+    } else {
+      this.parentElement.appendChild(newElement);
+    }
     return newElement;
     function createArrow(size:number, peak: Point, direction:Vector) {
       const p = Polygon.fromPoints([point(0, 0), point(-1, 0.5), point(-1, -0.5)]);
