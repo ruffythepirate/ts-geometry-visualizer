@@ -1,7 +1,7 @@
 import { Visualizer } from './Visualizer';
 import domino from 'domino';
 
-import { lineSegment, polygon, point, Polygon } from 'ts-2d-geometry';
+import { lineSegment, polygon, point, Polygon, vector } from 'ts-2d-geometry';
 
 describe('Visualizer', () => {
   let doc: Document;
@@ -28,6 +28,7 @@ describe('Visualizer', () => {
   test('addLineSegment should set correct properties', () => {
     const newElement = v.addLineSegment(lineSegment(0, 0, 1, 1));
 
+    expect(newElement.tagName).toEqual('line');
     expect(newElement.getAttribute('x1')).toBe('0');
     expect(newElement.getAttribute('y1')).toBe('0');
     expect(newElement.getAttribute('x2')).toBe('1');
@@ -60,5 +61,40 @@ describe('Visualizer', () => {
     const styleAttr = newElement.getAttribute('style');
 
     expect(styleAttr).toContain('stroke');
+  });
+
+  test('addVector should return items in a group', () => {
+    const newElement = v.addVector(point(0, 0), vector(1, 0));
+
+    expect(newElement.tagName).toEqual('g');
+  });
+
+  test('addVector should contain a line from point to vector', () => {
+    const newElement = v.addVector(point(0, 0), vector(1, 0));
+
+    let nodeFound = false;
+    newElement.childNodes.forEach((childNode) => {
+      const e = childNode as Element;
+      if (e.tagName === 'line') {
+        nodeFound = true;
+        expect(e.getAttribute('x1')).toBe('0');
+        expect(e.getAttribute('y1')).toBe('0');
+        expect(e.getAttribute('x2')).toBe('1');
+        expect(e.getAttribute('y2')).toBe('0');
+      }
+    });
+    expect(nodeFound).toBeTruthy();
+  });
+  test('addVector should contain a triangle on the arrow side', () => {
+    const newElement = v.addVector(point(0, 0), vector(1, 0));
+
+    let nodeFound = false;
+    newElement.childNodes.forEach((childNode) => {
+      const e = childNode as Element;
+      if (e.tagName === 'polygon') {
+        nodeFound = true;
+      }
+    });
+    expect(nodeFound).toBeTruthy();
   });
 });
