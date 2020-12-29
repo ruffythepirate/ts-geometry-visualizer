@@ -10,6 +10,8 @@
     "lint:fix": "npx tslint src/* --fix",
     "docs": "npx typedoc src",
     "test": "npx jest src",
+    "test:integration": "npx jest -c jest.config.integration.js src",
+    "test:integration:watch": "npx jest -c jest.config.integration.js --watchAll src",
     "test:coverage": "npx jest --coverage src && npm run test:badge",
     "test:badge": "npx lcov-badge-generator -o coverage/badge.svg coverage/lcov.info",
     "test:watch": "npx jest --watchAll src"
