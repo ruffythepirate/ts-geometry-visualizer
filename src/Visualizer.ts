@@ -88,14 +88,14 @@ export class Visualizer {
   /**
    * Adds a polygon to the element tied to this visualizer.
    */
-  addPolygon(p: Polygon, parentElement?: Element): Element {
+  addPolygon(p: Polygon, parentElement?: Element, style?: Style): Element {
     const newElement = this.document.createElementNS(xmlns, 'polygon');
 
     const points = p.points();
     const pointString = points.map(p => `${p.x},${p.y}`).join(' ');
 
     newElement.setAttributeNS(null, 'points', pointString);
-    newElement.setAttributeNS(null, 'style', 'fill:none;stroke:black;stroke-width:2');
+    this.applyStyling(newElement, style);
 
     if (parentElement !== undefined) {
       parentElement.appendChild(newElement);
@@ -114,7 +114,7 @@ export class Visualizer {
     const p2 = p.plus(v);
     const ls = this.addLineSegment(lineSegment(p.x, p.y, p2.x, p2.y), newElement);
     this.applyStyling(ls, style);
-    this.addPolygon(createArrow(v.norm2() / 8.0, p.plus(v), v), newElement);
+    this.addPolygon(createArrow(v.norm2() / 8.0, p.plus(v), v), newElement, style);
 
     if (parentElement !== undefined) {
       parentElement.appendChild(newElement);
@@ -136,5 +136,4 @@ export class Visualizer {
     }
 
   }
-
 }
