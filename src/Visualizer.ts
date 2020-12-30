@@ -8,7 +8,7 @@ const  xmlns = 'http://www.w3.org/2000/svg';
 
 const defaultStyle: Style = {
   fillRule: FillRule.nonzero,
-  fill: 'black',
+  fill: 'none',
   strokeWidth: 3,
   stroke: 'black',
 };
@@ -106,7 +106,8 @@ export class Visualizer {
     const p2 = p.plus(v);
     const ls = this.addLineSegment(lineSegment(p.x, p.y, p2.x, p2.y), newElement);
     this.applyStyling(ls, style);
-    this.addPolygon(createArrow(v.norm2() / 8.0, p.plus(v), v), newElement, style);
+    this.addPolygon(createArrow(v.norm2() / 8.0, p.plus(v), v), newElement,
+                    { ...style, fill:style?.stroke });
     this.addElement(newElement, parentElement);
 
     return newElement;
