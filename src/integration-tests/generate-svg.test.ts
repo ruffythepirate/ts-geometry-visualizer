@@ -1,4 +1,4 @@
-import { lineSegment, point, Polygon, vector } from 'ts-2d-geometry';
+import { lineSegment, point, Polygon, vector, rectangle } from 'ts-2d-geometry';
 import domino from 'domino'
 import {Visualizer} from '../Visualizer';
 
@@ -23,6 +23,7 @@ describe('generate-svg', () => {
     v.addPolygon(polygon);
     v.addVector(point(50,5), vector(200,100));
     v.addLineSegment(lineSegment(0,5,20,24));
+    v.addRectangle(rectangle(0,5,20,124));
 
     writeFile('test.html', createHtml(doc));
   });
