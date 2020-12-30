@@ -1,7 +1,7 @@
 import { Visualizer } from './Visualizer';
 import domino from 'domino';
 
-import { lineSegment, polygon, point, Polygon, vector } from 'ts-2d-geometry';
+import { lineSegment, polygon, point, Polygon, vector, rectangle } from 'ts-2d-geometry';
 
 describe('Visualizer', () => {
   let doc: Document;
@@ -17,6 +17,17 @@ describe('Visualizer', () => {
   test('constructor should set document and default parent element.', () => {
     expect(v.document).toBe(doc);
     expect(v.parentElement).toBe(parentElement);
+  });
+
+  test('addLineSegment should add line segment to parent element', () => {
+    const newElement = v.addRectangle(rectangle(10, 10, 100, 100));
+
+    expect(newElement.getAttribute('x')).toBe('10');
+    expect(newElement.getAttribute('y')).toBe('10');
+    expect(newElement.getAttribute('width')).toBe('90');
+    expect(newElement.getAttribute('height')).toBe('90');
+
+    expect(parentElement.children).toContain(newElement);
   });
 
   test('addLineSegment should add line segment to parent element', () => {
