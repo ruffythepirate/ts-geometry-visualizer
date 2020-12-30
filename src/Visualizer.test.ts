@@ -68,6 +68,19 @@ describe('Visualizer', () => {
     expect(newElement.tagName).toEqual('g');
   });
 
+  test('setStyling should add style to elements', () => {
+    const style = {
+      fill: 'red',
+      stroke: 'yellow',
+      fillWidth: 3,
+    };
+    const newElement = v.addLineSegment(lineSegment(0, 0, 1, 1), undefined, style);
+
+    expect(newElement.getAttribute('style')).toContain('fill:red');
+    expect(newElement.getAttribute('style')).toContain('fill-width:3');
+    expect(newElement.getAttribute('style')).toContain('stroke:yellow');
+  });
+
   test('addVector should contain a line from point to vector', () => {
     const newElement = v.addVector(point(0, 0), vector(1, 0));
 
