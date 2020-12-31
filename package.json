@@ -49,6 +49,6 @@
     "typescript": "^3.9.2"
   },
   "dependencies": {
-    "ts-2d-geometry": "^6.3.0"
+    "ts-2d-geometry": "^6.3.1"
   }
 }
