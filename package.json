@@ -37,7 +37,7 @@
   "sideEffects": false,
   "devDependencies": {
     "@types/jest": "^25.2.2",
-    "@types/node": "^14.14.16",
+    "@types/node": "^14.14.17",
     "domino": "^2.1.6",
     "fs": "0.0.1-security",
     "jest": "^25",
@@ -49,6 +49,6 @@
     "typescript": "^3.9.2"
   },
   "dependencies": {
-    "ts-2d-geometry": "^6.2.1"
+    "ts-2d-geometry": "^6.3.0"
   }
 }
