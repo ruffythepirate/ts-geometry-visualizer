@@ -1,6 +1,6 @@
 {
   "name": "ts-geometry-visualizer",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Generates SVG elements for geometrical components that can be appended to DOM elements.",
   "main": "dist/index.js",
   "types": "dist/index.d.js",
